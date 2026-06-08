@@ -1,0 +1,20 @@
+datasource db {
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model TankTelemetry {
+    id            String   @id @default(uuid())
+    deviceTime    DateTime 
+    distanceUpper Float    @db.Real
+    distanceLower Float    @db.Real
+    isPumpOn      Boolean
+    fuzzyOutput   Float    @db.Real
+    latencyMs     Int
+    createdAt     DateTime @default(now())
+
+    @@index([createdAt])
+}
