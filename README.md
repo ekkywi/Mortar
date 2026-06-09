@@ -115,8 +115,14 @@ Buat file `.env`:
 
 ```env
 DATABASE_URL="postgresql://USER:PASSWORD@HOST/neondb?sslmode=require&channel_binding=require"
+JWT_SECRET_KEY="ganti-dengan-secret-jwt-yang-kuat"
 API_SECRET_TOKEN="ganti-dengan-token-rahasia"
+NEXT_PUBLIC_MQTT_URL="wss://broker.example.com:port/mqtt"
+NEXT_PUBLIC_MQTT_USERNAME="username-broker"
+NEXT_PUBLIC_MQTT_PASSWORD="password-broker"
 ```
+
+Untuk deployment di Vercel, pastikan semua variabel di atas juga ditambahkan ke Project Settings -> Environment Variables agar proses build dan runtime tidak gagal karena konfigurasi yang hilang.
 
 Validasi schema Prisma:
 

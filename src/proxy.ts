@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 import { decrypt } from '@/lib/jwt';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const path = request.nextUrl.pathname;
     const isProtectedRoute = path.startsWith('/dashboard');
     const cookie = request.cookies.get('session')?.value;
