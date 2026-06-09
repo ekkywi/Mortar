@@ -90,3 +90,24 @@ export async function POST(request: Request) {
         );
     }
 }
+
+export async function GET() {
+    try {
+        const historyData = await prisma.tankTelemetry.findMany({
+            take: 100,
+            orderBy: {
+                deviceTime: 'desc',
+            },
+        });
+
+        const chronologicalData = historyData.reverse();
+        
+        return NextResponse.json(chronologicalData, { status: 200} );
+    } catch (error) {
+        console.error("TELEMETRY_GET_ERROR", error);
+        return NextResponse.json(
+            { error: "Gagal mengambil data historis telemetri." },
+            { status: 500 }
+        );
+    }
+}
