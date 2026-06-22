@@ -25,5 +25,6 @@ model TankTelemetry {
     latencyMs     Int
     createdAt     DateTime @default(now())
 
+    @@index([deviceTime])
     @@index([createdAt])
 }

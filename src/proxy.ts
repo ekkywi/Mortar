@@ -4,7 +4,7 @@ import { decrypt } from '@/lib/jwt';
 
 export async function proxy(request: NextRequest) {
     const path = request.nextUrl.pathname;
-    const isProtectedRoute = path.startsWith('/dashboard');
+    const isProtectedRoute = path.startsWith('/dashboard') || path.startsWith('/history-data');
     const cookie = request.cookies.get('session')?.value;
     const session = cookie ? await decrypt(cookie) : null;
 
