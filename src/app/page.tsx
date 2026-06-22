@@ -41,22 +41,22 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-neutral-950 text-neutral-100 font-mono p-4">
-      <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-lg p-8 shadow-2xl">
+    <main className="min-h-screen flex items-center justify-center bg-slate-100 text-slate-900 font-mono p-4">
+      <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-xl shadow-slate-200/70">
         <div className="text-center mb-8">
             <h1 className="text-2xl font-bold">MORTAR</h1>
-            <p className="text-neutral-500 text-sm mt-2">Monitoring Tinggi Air</p>
+            <p className="text-slate-500 text-sm mt-2">Monitoring Tinggi Air</p>
         </div>
 
         {error && (
-          <div className="bg-rose-500/10 border border-rose-500/50 text-rose-500 text-sm p-3 rounded mb-6 text-center">
+          <div className="bg-rose-50 border border-rose-200 text-rose-700 text-sm p-3 rounded mb-6 text-center">
             {error}
           </div>
         )}
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2" htmlFor="username">
+            <label className="block text-sm font-medium text-slate-600 mb-2" htmlFor="username">
               Username
             </label>
             <input
@@ -65,13 +65,13 @@ export default function LoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-2 text-neutral-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-2 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-colors disabled:opacity-50"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2" htmlFor="password">
+            <label className="block text-sm font-medium text-slate-600 mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -80,7 +80,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-2 text-neutral-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors disabled:opacity-50"
+              className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-2 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-colors disabled:opacity-50"
               required
             />
           </div>
