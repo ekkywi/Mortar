@@ -5,17 +5,35 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-interface TelemetryData {
+interface TelemetryApiItem {
   id: string;
-  deviceTime: string;
+  deviceTime: string | number | Date;
   distanceUpper: number;
   distanceLower: number;
   fuzzyOutput: number;
+}
+
+interface TelemetryChartData extends TelemetryApiItem {
   displayTime?: string;
 }
 
+function parseDeviceTime(deviceTime: string | number | Date) {
+  const parsedDate =
+    deviceTime instanceof Date
+      ? deviceTime
+      : typeof deviceTime === 'number'
+        ? new Date(deviceTime)
+        : new Date(deviceTime);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return null;
+  }
+
+  return parsedDate;
+}
+
 export default function TelemetryChart() {
-  const [data, setData] = useState<TelemetryData[]>([]);
+  const [data, setData] = useState<TelemetryChartData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,12 +42,18 @@ export default function TelemetryChart() {
         const response = await fetch('/api/telemetry');
         if (!response.ok) throw new Error('Gagal menarik data');
         
-        const result = await response.json();
+        const result: TelemetryApiItem[] = await response.json();
         
-        const formattedData = result.map((item: any) => ({
-          ...item,
-          displayTime: new Date(Number(item.deviceTime)).toLocaleTimeString('id-ID'),
-        }));
+        const formattedData = result.map((item) => {
+          const parsedDate = parseDeviceTime(item.deviceTime);
+
+          return {
+            ...item,
+            displayTime: parsedDate
+              ? parsedDate.toLocaleTimeString('id-ID')
+              : '--:--:--',
+          };
+        });
         
         setData(formattedData);
       } catch (error) {
